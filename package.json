@@ -1,0 +1,10 @@
+{
+  "name": "@renanhangai/vue-di",
+  "version": "0.0.0",
+  "description": "Dependency injection for vue",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}

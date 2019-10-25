@@ -1,0 +1,12 @@
+{
+	"eslintIntegration": true,
+	"tabWidth": 4,
+	"useTabs": true,
+	"singleQuote": true,
+	"trailingComma": "es5",
+	"printWidth": 120,
+	"[yml]": {
+		"tabWidth": 2,
+		"useTabs": false
+	}
+}
