@@ -5,6 +5,7 @@
 	"repository": "git@gitlab.com:renanhangai_/vue/vue-di.git",
 	"author": "renanhangai <hangai.renan@gmail.com>",
 	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"license": "MIT",
 	"dependencies": {
 		"tsyringe": "^3.4.0"
