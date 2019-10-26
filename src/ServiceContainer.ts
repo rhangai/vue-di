@@ -1,11 +1,11 @@
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import { VueDiServiceDataOptions } from '../types/options';
 
 export class ServiceContainer {
 	private readonly subscriptions: { [key: string]: any } = {};
 	private keys: { [key: string]: any } = {};
 
-	constructor(private readonly vm: Vue) {}
+	constructor(private readonly vue: VueConstructor, private readonly vm: Vue) {}
 
 	data() {
 		const servicesData: any = {};
@@ -34,6 +34,9 @@ export class ServiceContainer {
 		this.keys = {};
 	}
 
+	/**
+	 * Setup the $services variable on the vue vm
+	 */
 	setupServices() {
 		// Create the services
 		const services: any = {};
@@ -54,7 +57,11 @@ export class ServiceContainer {
 		});
 	}
 
-	/// Setup the services
+	/**
+	 * Setup every $servicesData
+	 *
+	 * For every servicesData entry, resolve the property and create a $services
+	 */
 	setupServicesData() {
 		// Create the services
 		const servicesData: any = {};
@@ -75,19 +82,25 @@ export class ServiceContainer {
 	}
 
 	/// Setup every item
-	setupServiceDataItem(key: string, serviceData: VueDiServiceDataOptions<Vue>) {
+	setupServiceDataItem(key: string, serviceData: VueDiServiceDataOptions<Vue> | { new (...args: any[]): any }) {
+		/// When a constructor is passed directly, call the fetch$
+		if (typeof serviceData === 'function') {
+			serviceData = {
+				service: serviceData,
+			};
+		}
+
 		const service = this.vm.$container.resolve(serviceData.service);
 		const method = serviceData.method || 'fetch$';
 		const params = serviceData.params;
 
 		let subscriptionLastParams: any = null;
 
-		const data = {
+		const data = this.vue.observable({
 			value: null,
 			error: null,
 			loading: false,
-			refresh: null as any,
-		};
+		});
 		const subscribe = (params?: any) => {
 			subscriptionLastParams = params;
 			if (this.subscriptions[key]) {
@@ -164,6 +177,7 @@ export class ServiceContainer {
 		} else {
 			subscribe(params);
 		}
+		// @ts-ignore
 		data.refresh = function() {
 			subscribe(subscriptionLastParams);
 		};
