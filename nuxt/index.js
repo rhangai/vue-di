@@ -8,6 +8,7 @@ export default function nuxtBootstrapVue(moduleOptions) {
 		src: path.resolve(__dirname, 'plugin.js'),
 		options: {
 			plugin: pkg.name,
+			reflectMetadata: moduleOptions.reflectMetadata !== false,
 			apollo: optionsApolloCheck(this.options, moduleOptions),
 			axios: optionsAxiosCheck(this.options, moduleOptions),
 		},

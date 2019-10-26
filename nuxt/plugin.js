@@ -1,4 +1,6 @@
+/* <% if (options.reflectMetadata) { %> */
 import 'reflect-metadata';
+/* <% } %> */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 /* <% if (options.apollo) { %> */

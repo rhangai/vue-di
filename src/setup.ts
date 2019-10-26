@@ -1,6 +1,7 @@
 import { VueConstructor } from 'vue';
 import { VueDiOptions } from '.';
 import { container } from 'tsyringe';
+import { ServiceContainer } from './ServiceContainer';
 
 export type VueDiSetupOptions = VueDiOptions & {
 	inject?: any;
@@ -14,6 +15,7 @@ export type VueDiSetupOptions = VueDiOptions & {
 export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 	options = { ...options };
 
+	// Create the container
 	const appContainer = options.container || container;
 	if (options.providers) {
 		for (const provider of options.providers) {
@@ -33,24 +35,30 @@ export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 	}
 
 	vue.mixin({
+		/**
+		 * Create the reactive data for the servicesData
+		 */
+		data() {
+			//@ts-ignore
+			if (!this._serviceContainer) return {};
+			//@ts-ignore
+			return this._serviceContainer.data();
+		},
+		/**
+		 * Create the service container
+		 */
 		beforeCreate() {
-			const services: any = {};
-			if (this.$options.services) {
-				for (const key in this.$options.services) {
-					const serviceClass = this.$options.services[key];
-					if (!serviceClass) {
-						services[key] = null;
-					} else {
-						//@ts-ignore
-						services[key] = this.$container.resolve(serviceClass);
-					}
-				}
-			}
-			Object.defineProperty(this, '$services', {
-				writable: true,
-				enumerable: true,
-				value: Object.freeze(services),
-			});
+			if (!this.$options.services && !this.$options.servicesData) return;
+			//@ts-ignore
+			this._serviceContainer = new ServiceContainer(this);
+		},
+		created() {
+			//@ts-ignore
+			this._serviceContainer && this._serviceContainer.setup();
+		},
+		beforeDestroy() {
+			//@ts-ignore
+			this._serviceContainer && this._serviceContainer.destroy();
 		},
 	});
 }
