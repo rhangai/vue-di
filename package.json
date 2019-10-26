@@ -1,6 +1,6 @@
 {
 	"name": "@renanhangai/vue-di",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "Dependency injection for vue",
 	"main": "dist/index.js",
 	"license": "MIT",
