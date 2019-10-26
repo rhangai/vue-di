@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 /* <% if (options.apollo) { %> */
@@ -6,6 +7,7 @@ import ApolloClient from 'apollo-client';
 import { setup } from '<%= options.plugin %>';
 
 export default async function(context, inject) {
+	if (process.server) return;
 	// Providers
 	const providers = [];
 
@@ -16,10 +18,20 @@ export default async function(context, inject) {
 			useValue: context.app.router,
 		},
 	});
+	/* <% if (options.axios) { %> */
+	providers.push({
+		token: 'axios',
+		provider: {
+			useFactory: () => context.$axios,
+		},
+	});
+	/* <% } %> */
 	/* <% if (options.apollo) { %> */
 	providers.push({
 		token: ApolloClient,
-		useValue: context.app.apolloProvider.clients.defaultClient,
+		provider: {
+			useFactory: () => context.app.apolloProvider.clients.defaultClient,
+		},
 	});
 	/* <% } %> */
 	setup(Vue, {

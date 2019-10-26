@@ -47,7 +47,7 @@ export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 				}
 			}
 			Object.defineProperty(this, '$services', {
-				writable: false,
+				writable: true,
 				enumerable: true,
 				value: Object.freeze(services),
 			});
