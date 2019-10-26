@@ -1,6 +1,6 @@
 {
 	"name": "@renanhangai/vue-di",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "Dependency injection for vue",
 	"repository": "git@gitlab.com:renanhangai_/vue/vue-di.git",
 	"author": "renanhangai <hangai.renan@gmail.com>",

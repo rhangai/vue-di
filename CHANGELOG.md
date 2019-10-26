@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.4...v0.1.5) (2019-10-26)
+
+
+### Features
+
+* Changed apollo, axios, and router providers ([7074f9c](https://gitlab.com/renanhangai_/vue/vue-di/commit/7074f9c6626af6ce23825b0c89a2c92265a7993c))
+
+
+### Bug Fixes
+
+* Typings for this package ([4ed9feb](https://gitlab.com/renanhangai_/vue/vue-di/commit/4ed9febfda5f5b51a00681adef5bc0afd6732763))
+
 ### [0.1.4](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.3...v0.1.4) (2019-10-26)
 
 ### [0.1.3](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.2...v0.1.3) (2019-10-26)
