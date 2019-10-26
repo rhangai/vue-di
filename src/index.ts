@@ -1,3 +1,5 @@
+/// <reference path="../types/vue.d.ts" />
+
 import { PluginObject, VueConstructor } from 'vue';
 import {
 	InjectionToken,

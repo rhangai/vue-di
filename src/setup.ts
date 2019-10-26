@@ -41,6 +41,7 @@ export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 					if (!serviceClass) {
 						services[key] = null;
 					} else {
+						//@ts-ignore
 						services[key] = this.$container.resolve(serviceClass);
 					}
 				}
