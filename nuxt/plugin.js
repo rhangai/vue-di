@@ -2,10 +2,6 @@
 import 'reflect-metadata';
 /* <% } %> */
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-/* <% if (options.apollo) { %> */
-import ApolloClient from 'apollo-client';
-/* <% } %> */
 import { setup } from '<%= options.plugin %>';
 
 export default async function(context, inject) {
@@ -15,7 +11,7 @@ export default async function(context, inject) {
 
 	// Cria o container
 	providers.push({
-		token: VueRouter,
+		token: 'router',
 		provider: {
 			useValue: context.app.router,
 		},
@@ -30,7 +26,7 @@ export default async function(context, inject) {
 	/* <% } %> */
 	/* <% if (options.apollo) { %> */
 	providers.push({
-		token: ApolloClient,
+		token: 'apollo',
 		provider: {
 			useFactory: () => context.app.apolloProvider.clients.defaultClient,
 		},
