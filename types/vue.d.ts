@@ -8,7 +8,7 @@ declare module 'vue/types/options' {
 			[key: string]: any;
 		};
 		servicesData?: {
-			[key: string]: VueDiServiceDataOptions<V>;
+			[key: string]: VueDiServiceDataOptions<V> | { new (...args: any[]): any };
 		};
 	}
 }

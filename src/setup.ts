@@ -50,7 +50,7 @@ export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 		beforeCreate() {
 			if (!this.$options.services && !this.$options.servicesData) return;
 			//@ts-ignore
-			this._serviceContainer = new ServiceContainer(this);
+			this._serviceContainer = new ServiceContainer(vue, this);
 		},
 		created() {
 			//@ts-ignore

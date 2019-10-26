@@ -24,14 +24,21 @@ class DataService {
 ```ts
 import { singleton } from 'tsyringe';
 import { DataService } from './Data.service';
+import { ReplaySubject } from 'rxjs';
 
 @singleton()
 class UserService {
+	private readonly usuario$ = new ReplaySubject(1);
 	constructor(private readonly dataService: DataService) {}
 
-	login() {
+	async login() {
 		this.dataService.doSomething();
+		this.usuario$.next({ id: 1, name: "John Doe" });
 		return request(...);
+	}
+
+	fetch$() {
+		return this.usuario$;
 	}
 }
 ```
@@ -45,9 +52,19 @@ export default {
 	services: {
 		userService: UserService,
 	},
+	servicesData: {
+		usuario: {
+			service: UserService,
+			method: 'fetch$',
+		},
+	},
 	methods: {
-		login() {
-			this.$services.userService.login();
+		async login() {
+			await this.$services.userService.login();
+		},
+		doSomethingWithUser() {
+			if (!this.usuario) return 'Invalid user';
+			send(this.usuario.name);
 		},
 	},
 };
