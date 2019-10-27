@@ -9,7 +9,14 @@ export default async function(context, inject) {
 	// Providers
 	const providers = [];
 
-	// Cria o container
+	// Nuxt application
+	providers.push({
+		token: 'app',
+		provider: {
+			useValue: context.app,
+		},
+	});
+	// Router
 	providers.push({
 		token: 'router',
 		provider: {
