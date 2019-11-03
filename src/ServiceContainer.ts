@@ -1,5 +1,5 @@
 import Vue, { VueConstructor } from 'vue';
-import { VueDiServiceDataOptions } from '../types/options';
+import { VueDiServiceDataOptions, VueDiServiceData } from '../types/options';
 
 export class ServiceContainer {
 	private readonly subscriptions: { [key: string]: any } = {};
@@ -96,16 +96,26 @@ export class ServiceContainer {
 
 		let subscriptionLastParams: any = null;
 
-		const data = this.vue.observable({
-			value: null,
-			error: null,
-			loading: false,
-		});
+		const data = this.createServiceData();
+
+		/**
+		 * Subsribe to the service data
+		 * @param params
+		 */
 		const subscribe = (params?: any) => {
+			// Save the parameters
 			subscriptionLastParams = params;
 			if (this.subscriptions[key]) {
 				this.subscriptions[key].unsubscribe();
 				this.subscriptions[key] = null;
+			}
+
+			// Close the old fetcher data
+			if (data.fetcher) {
+				if (data.fetcher.close) {
+					data.fetcher.close();
+				}
+				data.fetcher = null;
 			}
 
 			const callKey = {};
@@ -119,13 +129,32 @@ export class ServiceContainer {
 
 				// @ts-ignore
 				const result = service[method].call(service, params);
+
+				// Null result
 				if (result == null) {
 					data.error = null;
 					data.value = null;
+					data.fetcher = null;
+					data.loading = false;
+					data.complete = true;
 					this.vm.$set(this.vm, key, null);
+					return;
+				}
+
+				// Check if result is an obersable or anything with an observable$ method or property
+				let observable = null;
+				let fetcher = null;
+				if (result.observable$) {
+					fetcher = result;
+					observable = typeof result.observable$ === 'function' ? result.observable$() : result.observable$;
 				} else if (result.subscribe) {
+					observable = result;
+				}
+				if (observable) {
 					data.loading = true;
-					this.subscriptions[key] = result.subscribe({
+					data.complete = false;
+					data.fetcher = fetcher;
+					this.subscriptions[key] = observable.subscribe({
 						next: (value: any) => {
 							if (this.keys[key] !== callKey) return;
 							data.loading = false;
@@ -133,33 +162,52 @@ export class ServiceContainer {
 							data.value = value;
 							this.vm.$set(this.vm, key, value);
 						},
-						error: (error: any) => {
+						complete: () => {
 							if (this.keys[key] !== callKey) return;
 							data.loading = false;
+							data.complete = true;
+						},
+						error: (error: any) => {
+							if (this.keys[key] !== callKey) return;
 							data.error = error;
+							data.loading = false;
+							data.complete = true;
 						},
 					});
-				} else if (result.then) {
+					return;
+				}
+
+				// Fetch a promise
+				if (result.then) {
 					data.loading = true;
+					data.complete = false;
+					data.fetcher = null;
 					result.then(
 						(value: any) => {
 							if (this.keys[key] !== callKey) return;
-							data.loading = false;
 							data.error = null;
 							data.value = value;
+							data.loading = false;
+							data.complete = true;
 							this.vm.$set(this.vm, key, value);
 						},
 						(error: any) => {
 							if (this.keys[key] !== callKey) return;
-							data.loading = false;
 							data.error = error;
+							data.loading = false;
+							data.complete = true;
 						}
 					);
-				} else {
-					data.error = null;
-					data.value = result;
-					this.vm.$set(this.vm, key, result);
+					return;
 				}
+
+				// Fetch the result normally
+				data.error = null;
+				data.value = result;
+				data.fetcher = null;
+				data.loading = false;
+				data.complete = true;
+				this.vm.$set(this.vm, key, result);
 			} catch (err) {
 				data.error = err;
 			}
@@ -177,10 +225,28 @@ export class ServiceContainer {
 		} else {
 			subscribe(params);
 		}
-		// @ts-ignore
 		data.refresh = function() {
 			subscribe(subscriptionLastParams);
 		};
+		data.fetchMore = function() {
+			if (data.complete || data.loading) return;
+			if (data.fetcher && data.fetcher.fetchMore) {
+				data.loading = true;
+				return data.fetcher.fetchMore();
+			}
+		};
+		return data;
+	}
+
+	createServiceData(): VueDiServiceData {
+		// @ts-ignore
+		const data: VueDiServiceData = this.vue.observable({
+			value: null,
+			error: null,
+			loading: false,
+			complete: false,
+		});
+		data.fetcher = null;
 		return data;
 	}
 }

@@ -7,8 +7,11 @@ export type VueDiServiceDataOptions<T> = {
 };
 
 export type VueDiServiceData = {
-	value: any;
 	error: any;
+	value: any;
 	loading: boolean;
-	refresh: () => void;
+	complete: boolean;
+	fetcher: any;
+	fetchMore(): boolean | Promise<boolean>;
+	refresh(): void;
 };
