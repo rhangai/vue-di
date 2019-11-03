@@ -46,6 +46,7 @@ class UserService {
 `Component.vue`
 
 ```ts
+//<template><div>{{user}}</div></template>
 import { UserService } from 'services/User.service';
 
 export default {
@@ -53,7 +54,7 @@ export default {
 		userService: UserService,
 	},
 	servicesData: {
-		usuario: {
+		user: {
 			service: UserService,
 			method: 'fetch$',
 		},
@@ -63,8 +64,8 @@ export default {
 			await this.$services.userService.login();
 		},
 		doSomethingWithUser() {
-			if (!this.usuario) return 'Invalid user';
-			send(this.usuario.name);
+			if (!this.user) return 'Invalid user';
+			send(this.user.name);
 		},
 	},
 };
@@ -78,7 +79,7 @@ yarn add @renanhangai/vue-di reflect-metadata
 
 ### Installation with **nuxt**
 
-on your entrypoit
+on your entrypoint
 
 ```js
 import 'reflect-metadata';
@@ -106,3 +107,19 @@ export default {
 	},
 };
 ```
+
+## ServiceData
+
+When using servicesData, you may return a few things
+
+### Observable
+
+Returning an observable makes the component subscribe to it and react to its changes
+
+### Promise
+
+### Value
+
+### DataFetcher
+
+Returning an object with an observable\$ method or property will subscribe to it and allow a few more options
