@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.6...v0.1.7) (2019-11-03)
+
+
+### Features
+
+* Added fetcher option on serviceData ([e3327de](https://gitlab.com/renanhangai_/vue/vue-di/commit/e3327de2b283c771be405cb678ab308d681e31f8))
+
 ### [0.1.6](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.5...v0.1.6) (2019-10-27)
 
 ### [0.1.5](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.4...v0.1.5) (2019-10-26)
