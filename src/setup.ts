@@ -36,25 +36,14 @@ export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 
 	vue.mixin({
 		/**
-		 * Create the reactive data for the servicesData
-		 */
-		data() {
-			//@ts-ignore
-			if (!this._serviceContainer) return {};
-			//@ts-ignore
-			return this._serviceContainer.data();
-		},
-		/**
 		 * Create the service container
 		 */
 		beforeCreate() {
-			if (!this.$options.services && !this.$options.servicesData) return;
+			if (!this.$options.services) return;
+			const container = new ServiceContainer(vue, this);
+			container.setup();
 			//@ts-ignore
-			this._serviceContainer = new ServiceContainer(vue, this);
-		},
-		created() {
-			//@ts-ignore
-			this._serviceContainer && this._serviceContainer.setup();
+			this._serviceContainer = container;
 		},
 		beforeDestroy() {
 			//@ts-ignore
