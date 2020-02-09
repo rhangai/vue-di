@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.7...v0.2.0) (2020-02-09)
+
+
+### Features
+
+* Removed the servicesData property ([ff325b4](https://gitlab.com/renanhangai_/vue/vue-di/commit/ff325b4bf73eea50509c4396893a755b12366177))
+
 ### [0.1.7](https://gitlab.com/renanhangai_/vue/vue-di/compare/v0.1.6...v0.1.7) (2019-11-03)
 
 
