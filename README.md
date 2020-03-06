@@ -56,7 +56,7 @@ export default {
 ## Installation
 
 ```sh
-yarn add @renanhangai/vue-di tsyringe reflect-metadata
+yarn add @rhangai/vue-di tsyringe reflect-metadata
 ```
 
 ### Installation with **nuxt**
@@ -66,7 +66,7 @@ on your entrypoint
 ```js
 import 'reflect-metadata';
 import Vue from 'vue';
-import VueDi from '@renanhangai/vue-di';
+import VueDi from '@rhangai/vue-di';
 import { container } from 'tsyringe';
 
 Vue.use(VueDi, {
@@ -79,7 +79,7 @@ on `vue.config.js`
 
 ```js
 module.exports = {
-	transpileDependencies: ['@renanhangai/vue-di'],
+	transpileDependencies: ['@rhangai/vue-di'],
 };
 ```
 
@@ -87,9 +87,9 @@ module.exports = {
 
 ```js
 export default {
-	modules: ['@renanhangai/vue-di/nuxt'],
+	modules: ['@rhangai/vue-di/nuxt'],
 	build: {
-		transpile: ['@renanhangai/vue-di'],
+		transpile: ['@rhangai/vue-di'],
 	},
 };
 ```
