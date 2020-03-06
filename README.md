@@ -24,11 +24,9 @@ class DataService {
 ```ts
 import { singleton } from 'tsyringe';
 import { DataService } from './Data.service';
-import { ReplaySubject } from 'rxjs';
 
 @singleton()
 class UserService {
-	private readonly usuario$ = new ReplaySubject(1);
 	constructor(private readonly dataService: DataService) {}
 
 	async login() {
@@ -41,7 +39,6 @@ class UserService {
 `Component.vue`
 
 ```ts
-//<template><div>{{user}}</div></template>
 import { UserService } from 'services/User.service';
 
 export default {
@@ -51,10 +48,6 @@ export default {
 	methods: {
 		async login() {
 			await this.$services.userService.login();
-		},
-		doSomethingWithUser() {
-			if (!this.user) return 'Invalid user';
-			send(this.user.name);
 		},
 	},
 };
