@@ -1,6 +1,6 @@
 # vue-di
 
-Dependency Injection for vue, made simple.
+Dependency Injection for vue, using [tsryinge](https://github.com/microsoft/tsyringe)
 
 ## Basic Usage
 
