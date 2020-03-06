@@ -74,8 +74,12 @@ on your entrypoint
 import 'reflect-metadata';
 import Vue from 'vue';
 import VueDi from '@renanhangai/vue-di';
+import { container } from 'tsyringe';
 
-Vue.use(VueDi, options);
+Vue.use(VueDi, {
+	container,
+	// ... other options
+});
 ```
 
 on `vue.config.js`
