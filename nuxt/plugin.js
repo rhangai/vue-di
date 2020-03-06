@@ -2,6 +2,7 @@
 import 'reflect-metadata';
 /* <% } %> */
 import Vue from 'vue';
+import { container } from 'tsyringe';
 import { setup } from '<%= options.plugin %>';
 
 export default async function(context, inject) {
@@ -41,6 +42,7 @@ export default async function(context, inject) {
 	/* <% } %> */
 	setup(Vue, {
 		inject,
+		container,
 		providers,
 	});
 }

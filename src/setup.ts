@@ -1,6 +1,5 @@
 import { VueConstructor } from 'vue';
 import { VueDiOptions } from '.';
-import { container } from 'tsyringe';
 import { ServiceContainer } from './ServiceContainer';
 
 export type VueDiSetupOptions = VueDiOptions & {
@@ -16,21 +15,23 @@ export function setup(vue: VueConstructor, options?: VueDiSetupOptions) {
 	options = { ...options };
 
 	// Create the container
-	const appContainer = options.container || container;
+	const container = options.container;
+	if (!container)
+		throw new Error(`Invalid container when installing vue-di. Did you use { container } from "tsyringe" module?`);
 	if (options.providers) {
 		for (const provider of options.providers) {
-			appContainer.register(provider.token, provider.provider as any);
+			container.register(provider.token, provider.provider as any);
 		}
 	}
 
 	// Inject using nuxt if inject is provided
 	if (options.inject) {
-		options.inject('container', appContainer);
+		options.inject('container', container);
 	} else {
 		Object.defineProperty(vue.prototype, '$container', {
 			writable: false,
 			enumerable: true,
-			value: appContainer,
+			value: container,
 		});
 	}
 

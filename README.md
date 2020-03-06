@@ -15,7 +15,7 @@ import { injectable } from 'tsyringe';
 class DataService {
 	constructor() {}
 
-	doSomething() {}
+	async doSomething() {}
 }
 ```
 
@@ -32,13 +32,8 @@ class UserService {
 	constructor(private readonly dataService: DataService) {}
 
 	async login() {
-		this.dataService.doSomething();
-		this.usuario$.next({ id: 1, name: "John Doe" });
+		await this.dataService.doSomething();
 		return request(...);
-	}
-
-	fetch$() {
-		return this.usuario$;
 	}
 }
 ```
@@ -52,12 +47,6 @@ import { UserService } from 'services/User.service';
 export default {
 	services: {
 		userService: UserService,
-	},
-	servicesData: {
-		user: {
-			service: UserService,
-			method: 'fetch$',
-		},
 	},
 	methods: {
 		async login() {
@@ -74,7 +63,7 @@ export default {
 ## Installation
 
 ```sh
-yarn add @renanhangai/vue-di reflect-metadata
+yarn add @renanhangai/vue-di tsyringe reflect-metadata
 ```
 
 ### Installation with **nuxt**
@@ -107,19 +96,3 @@ export default {
 	},
 };
 ```
-
-## ServiceData
-
-When using servicesData, you may return a few things
-
-### Observable
-
-Returning an observable makes the component subscribe to it and react to its changes
-
-### Promise
-
-### Value
-
-### DataFetcher
-
-Returning an object with an observable\$ method or property will subscribe to it and allow a few more options
