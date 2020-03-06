@@ -93,3 +93,23 @@ export default {
 	},
 };
 ```
+
+When using nuxt, there is already a few services registered.
+
+-   `app`: Nuxt Application
+-   `router`: Vue Router
+-   `axios`: this.\$axios if using @nuxtjs/axios
+-   `apollo`: this.\$apollo if using @nuxtjs/apollo
+
+```ts
+import { injectable, inject } from 'tsyringe';
+
+@injectable()
+export class LoginService {
+	constructor(@inject('axios') private readonly axios: any) {}
+
+	async login() {
+		const response = await this.axios.post(/* ... */);
+	}
+}
+```
