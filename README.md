@@ -2,6 +2,12 @@
 
 Dependency Injection for vue, using [tsryinge](https://github.com/microsoft/tsyringe)
 
+## Installation
+
+```sh
+yarn add @rhangai/vue-di tsyringe reflect-metadata
+```
+
 ## Basic Usage
 
 Simple usage
@@ -53,12 +59,6 @@ export default {
 };
 ```
 
-## Installation
-
-```sh
-yarn add @rhangai/vue-di tsyringe reflect-metadata
-```
-
 ### Installation with **nuxt**
 
 on your entrypoint
@@ -96,10 +96,10 @@ export default {
 
 When using nuxt, there is already a few services registered.
 
--   `app`: Nuxt Application
--   `router`: Vue Router
--   `axios`: this.\$axios if using @nuxtjs/axios
--   `apollo`: this.\$apollo if using @nuxtjs/apollo
+- `app`: Nuxt Application
+- `router`: Vue Router
+- `axios`: this.\$axios if using @nuxtjs/axios
+- `apollo`: this.\$apollo if using @nuxtjs/apollo
 
 ```ts
 import { injectable, inject } from 'tsyringe';
