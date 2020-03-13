@@ -4,6 +4,7 @@
 ~*
 .\#*
 \#*
+*.log
 
 # Módulos
 node_modules
@@ -11,3 +12,4 @@ node_modules
 
 # Build
 /dist
+/lib

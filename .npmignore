@@ -1,5 +1,5 @@
 *
-!/dist/**/*
+!/lib/**/*
 !/README.md
 !/package.json
 !/yarn.lock

@@ -5,7 +5,7 @@
 		"module": "esnext",
 		"moduleResolution": "node",
 		"rootDir": "src",
-		"outDir": "dist",
+		"outDir": "lib",
 		"strict": true,
 		"declaration": true,
 		"esModuleInterop": true

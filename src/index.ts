@@ -8,6 +8,7 @@ import {
 	DependencyContainer,
 } from 'tsyringe';
 import { setup } from './setup';
+import '../types/vue';
 
 export type VueDiProvider = {
 	token: InjectionToken;
