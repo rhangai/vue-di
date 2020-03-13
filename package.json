@@ -1,30 +1,30 @@
 {
-	"name": "@rhangai/vue-di",
-	"version": "0.3.1",
-	"description": "Dependency injection for vue",
-	"repository": "https://github.com/rhangai/vue-di.git",
-	"author": "rhangai <hangai.renan@gmail.com>",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
-	"license": "MIT",
-	"dependencies": {},
-	"devDependencies": {
-		"npm-run-all": "^4.1.5",
-		"reflect-metadata": "^0.1.13",
-		"rimraf": "^3.0.2",
-		"standard-version": "^7.1.0",
-		"tsyringe": "^4.1.0",
-		"typescript": "^3.8.3",
-		"vue": "^2.6.11"
-	},
-	"peerDependencies": {
-		"reflect-metadata": "^0.1.13",
-		"tsyringe": "^4.1.0"
-	},
-	"scripts": {
-		"build": "tsc",
-		"clean": "rimraf lib",
-		"prepack": "run-s clean build",
-		"release": "standard-version"
-	}
+  "name": "@rhangai/vue-di",
+  "version": "0.3.1",
+  "description": "Dependency injection for vue",
+  "repository": "https://github.com/rhangai/vue-di.git",
+  "author": "rhangai <hangai.renan@gmail.com>",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "standard-version": "^7.1.0",
+    "tsyringe": "^4.1.0",
+    "typescript": "^3.8.3",
+    "vue": "^2.6.11"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.1.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "prepack": "run-s clean build",
+    "release": "standard-version"
+  }
 }
