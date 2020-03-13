@@ -59,7 +59,7 @@ export default {
 };
 ```
 
-### Installation with **nuxt**
+### Installation
 
 on your entrypoint
 
