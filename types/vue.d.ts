@@ -1,10 +1,10 @@
 import Vue from 'vue';
-import { DependencyContainer } from 'tsyringe';
+import { DependencyContainer, InjectionToken } from 'tsyringe';
 
 declare module 'vue/types/options' {
 	interface ComponentOptions<V extends Vue> {
 		services?: {
-			[key: string]: any;
+			[key: string]: InjectionToken;
 		};
 	}
 }

@@ -17,14 +17,10 @@ export class ServiceContainer {
 	private setupServices() {
 		// Create the services
 		const services: any = {};
-		if (this.vm.$options.services) {
-			for (const key in this.vm.$options.services) {
-				const serviceClass = this.vm.$options.services[key];
-				if (!serviceClass) {
-					services[key] = null;
-				} else {
-					services[key] = this.vm.$container.resolve(serviceClass);
-				}
+		for (const key in this.vm.$options.services) {
+			const serviceClass = this.vm.$options.services[key];
+			if (serviceClass) {
+				services[key] = this.vm.$container.resolve(serviceClass);
 			}
 		}
 		Object.defineProperty(this.vm, '$services', {
