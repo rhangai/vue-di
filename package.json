@@ -30,6 +30,7 @@
     "build": "tsc -p tsconfig.build.json",
     "clean": "rimraf lib",
     "prepack": "run-s clean build",
+    "prerelease": "run-s test",
     "release": "standard-version",
     "test": "jest"
   }
