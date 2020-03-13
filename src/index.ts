@@ -1,3 +1,4 @@
+/// <reference path="../types/vue.d.ts" />
 import { PluginObject, VueConstructor } from 'vue';
 import {
 	InjectionToken,
@@ -8,7 +9,6 @@ import {
 	DependencyContainer,
 } from 'tsyringe';
 import { setup } from './setup';
-import '../types/vue.d';
 
 export type VueDiProvider = {
 	token: InjectionToken;
